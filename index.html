@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boa Hortifruti | Frutas, Verduras e Legumes</title>
+<meta name="description" content="Boa Hortifruti — frutas, verduras e legumes com qualidade, frescor e confiança. Há quase 14 anos levando o melhor para você.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Boa Hortifruti | Frutas, Verduras e Legumes">
+<meta property="og:description" content="Boa Hortifruti — frutas, verduras e legumes com qualidade, frescor e confiança. Há quase 14 anos levando o melhor para você.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/logo/boa-hortifruti-logo.jpeg">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="icon" href="images/logo/boa-hortifruti-logo.jpeg" type="image/jpeg">
+<style>
+/* ==========================================================================
+   Boa Hortifruti — Landing Page
+   Design system: fundo verde escuro dominante, verde-limão como destaque,
+   frutas/verduras e folhas como elementos naturais, cards arredondados.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Verdes escuros — base do site */
+  --bg-0: #0B2418;
+  --bg-1: #10351F;
+  --bg-2: #174A27;
+
+  /* Verde-limão — destaque, botões, ícones, hover */
+  --lime: #B8E51D;
+  --lime-bright: #D5F238;
+
+  /* Complementares — presentes nas frutas/produtos e acentos pontuais */
+  --yellow-sun: #F5B93D;
+  --orange-citrus: #E8752C;
+
+  --white: #FFFFFF;
+  --text-soft: rgba(255, 255, 255, 0.74);
+  --text-faint: rgba(255, 255, 255, 0.5);
+  --line: rgba(255, 255, 255, 0.14);
+
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --radius-lg: 26px;
+  --radius-md: 18px;
+  --radius-sm: 10px;
+
+  --shadow-soft: 0 24px 55px -28px rgba(0, 0, 0, 0.6);
+  --shadow-tight: 0 10px 22px -12px rgba(0, 0, 0, 0.5);
+
+  --container: 1200px;
+  --gutter: clamp(16px, 5vw, 32px);
+
+  /* Ritmo vertical entre seções */
+  --space-section: clamp(40px, 6vw, 88px);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--font-body);
+  color: var(--white);
+  background: var(--bg-0);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  color: var(--white);
+  line-height: 1.1;
+  font-weight: 700;
+}
+h2 { font-weight: 800; }
+
+p { margin: 0; line-height: 1.6; color: var(--text-soft); }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+}
+
+section { position: relative; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Reveal on scroll
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.13s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.21s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.29s; }
+
+/* ==========================================================================
+   Botões
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease);
+  white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.btn-lime {
+  background: var(--lime);
+  color: var(--bg-0);
+  box-shadow: var(--shadow-tight);
+}
+.btn-lime:hover {
+  background: var(--lime-bright);
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+.btn-outline:hover {
+  background: var(--white);
+  color: var(--bg-0);
+  transform: translateY(-3px);
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: var(--white);
+  box-shadow: 0 14px 28px -14px rgba(37, 211, 102, 0.55);
+}
+.btn-whatsapp:hover { background: #1fb958; transform: translateY(-3px); }
+
+.btn-block { width: 100%; }
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(11, 36, 24, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.3s var(--ease);
+}
+.site-header.is-scrolled { box-shadow: 0 10px 30px -18px rgba(0, 0, 0, 0.6); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 20px;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+/* Logo completa: moldura com a proporção real da imagem (694x562), sem corte */
+.brand-logo {
+  display: block;
+  height: 46px;
+  aspect-ratio: 694 / 562;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: visible;
+  box-shadow: var(--shadow-tight);
+  line-height: 0;
+}
+.brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+}
+.brand-word { display: none; }
+
+.main-nav { display: none; }
+.main-nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+.main-nav a {
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--white);
+  position: relative;
+  padding-bottom: 4px;
+}
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+.main-nav a:hover::after { transform: scaleX(1); }
+
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; position: relative; z-index: 1; }
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  color: var(--white);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn:hover { transform: translateY(-2px) scale(1.05); background: var(--lime); color: var(--bg-0); }
+
+.hamburger {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.35s var(--ease), opacity 0.35s var(--ease); }
+.hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span:nth-child(2) { opacity: 0; }
+.hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  background: var(--bg-0);
+  z-index: 90;
+  padding: 24px var(--gutter) 32px;
+  transform: translateX(100%);
+  transition: transform 0.45s var(--ease);
+  overflow-y: auto;
+}
+.mobile-nav.is-open { transform: translateX(0); }
+.mobile-nav ul { list-style: none; padding: 0; margin: 0 0 26px; }
+.mobile-nav li { border-bottom: 1px solid var(--line); }
+.mobile-nav a { display: block; padding: 15px 4px; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; color: var(--white); }
+.mobile-nav-actions { display: flex; flex-direction: column; gap: 10px; }
+
+/* ==========================================================================
+   Hero — arte oficial fornecida (recortada), usada como está
+   ========================================================================== */
+
+.hero {
+  padding: 76px 0 0;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(165deg, var(--bg-0) 0%, var(--bg-1) 100%);
+}
+
+.hero-image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1672px;
+  aspect-ratio: 1672 / 776;
+  margin: 0 auto;
+}
+.hero-art { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.hero-hotspot { position: absolute; border-radius: 100px; }
+.hero-hotspot:focus-visible { outline: 3px solid var(--white); outline-offset: 2px; }
+
+/* Desktop (arte 1672×776) */
+.hero-hotspot-whats { left: 6.2%; top: 63%; width: 14.5%; height: 7.5%; }
+.hero-hotspot-produtos { left: 21.5%; top: 63%; width: 19%; height: 7.5%; }
+
+/* Mobile — arte vertical dedicada (940×1672), proporção e botões diferentes */
+@media (max-width: 767px) {
+  .hero-image-frame { max-width: 940px; aspect-ratio: 940 / 1672; }
+  .hero-hotspot-whats { left: 10.1%; top: 47.1%; width: 36.7%; height: 4.5%; }
+  .hero-hotspot-produtos { left: 48.9%; top: 47.1%; width: 39.9%; height: 4.5%; }
+}
+
+/* ==========================================================================
+   Faixa de diferenciais — compacta, colada ao Hero
+   ========================================================================== */
+
+.strip {
+  background: var(--bg-1);
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.strip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+.strip-item { display: flex; align-items: center; gap: 12px; }
+.strip-item svg { width: 26px; height: 26px; flex-shrink: 0; color: var(--lime); }
+.strip-item strong { display: block; font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); }
+.strip-item span { font-size: 0.82rem; color: var(--text-soft); }
+
+/* ==========================================================================
+   Sobre
+   ========================================================================== */
+
+.about { padding: var(--space-section) 0; background: var(--bg-0); }
+.about-inner { display: grid; gap: 34px; align-items: center; }
+.about-eyebrow { color: var(--lime); font-weight: 600; font-size: 0.92rem; margin-bottom: 12px; display: block; }
+.about h2 { font-size: clamp(1.8rem, 4.6vw, 2.7rem); max-width: 14ch; }
+.about p.lead { margin-top: 18px; font-size: 1.02rem; max-width: 54ch; }
+.about-stats { display: flex; gap: 32px; margin-top: 26px; }
+.about-stats div strong { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; color: var(--lime); }
+.about-stats div span { font-size: 0.82rem; color: var(--text-soft); }
+.about .btn { margin-top: 26px; }
+
+.photo-placeholder {
+  border-radius: var(--radius-lg);
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 14px, transparent 14px, transparent 28px),
+    var(--bg-1);
+  border: 1.5px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  min-height: 260px;
+  box-shadow: var(--shadow-soft);
+}
+.photo-placeholder strong { display: block; color: var(--white); margin-bottom: 6px; font-family: var(--font-body); }
+
+/* ==========================================================================
+   Categorias — card com foto no topo e barra de rótulo
+   ========================================================================== */
+
+.categories { padding: 0 0 var(--space-section); background: var(--bg-0); }
+.section-head { max-width: 640px; margin-bottom: 34px; }
+.section-head h2 { font-size: clamp(1.8rem, 4.4vw, 2.5rem); }
+.section-head p { margin-top: 12px; font-size: 1rem; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+.cat-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+.cat-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.cat-card:hover { transform: translateY(-5px); border-color: var(--lime); }
+.cat-photo {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.74rem;
+  color: var(--text-faint);
+}
+.cat-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.cat-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; }
+.cat-bar-left { display: flex; align-items: center; gap: 10px; }
+.cat-icon-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.cat-bar strong { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); }
+.cat-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lime);
+  flex-shrink: 0;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.cat-card:hover .cat-arrow { background: var(--lime); border-color: var(--lime); color: var(--bg-0); }
+.cat-arrow svg { width: 14px; height: 14px; }
+
+/* ==========================================================================
+   Banner — "Frescor que dá gosto"
+   ========================================================================== */
+
+.banner { padding: 0 0 var(--space-section); }
+.banner-inner {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, var(--bg-2) 0%, var(--bg-1) 100%);
+  border: 1px solid var(--line);
+  padding: 30px clamp(20px, 5vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.banner-inner::before, .banner-inner::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 90px;
+  background: repeating-linear-gradient(135deg, rgba(184,229,29,0.12), rgba(184,229,29,0.12) 10px, transparent 10px, transparent 20px);
+}
+.banner-inner::before { left: 0; }
+.banner-inner::after { right: 0; }
+.banner-text { position: relative; z-index: 1; }
+.banner-text h3 { font-family: var(--font-display); font-size: clamp(1.3rem, 3.4vw, 1.9rem); letter-spacing: 0.02em; color: var(--white); }
+.banner-text p { margin-top: 8px; color: var(--text-soft); font-size: 0.92rem; }
+
+/* ==========================================================================
+   Nossos produtos — 3 carrosséis independentes (Frutas, Verduras, Legumes)
+   ========================================================================== */
+
+.our-products { padding: var(--space-section) 0; background: var(--bg-0); }
+
+.product-group { margin-top: 40px; }
+.product-group:first-of-type { margin-top: 6px; }
+
+.product-group-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.product-group-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.product-group-head h3 { font-size: 1.2rem; }
+.product-group-head p { margin-top: 2px; font-size: 0.84rem; }
+
+/* Carrossel — scroll nativo com snap; suporta swipe por padrão do navegador */
+.carousel { position: relative; display: flex; align-items: center; gap: 8px; }
+
+.carousel-viewport {
+  flex: 1;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 2px 6px;
+}
+.carousel-viewport::-webkit-scrollbar { display: none; }
+.carousel-viewport:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; border-radius: 8px; }
+
+.carousel-card {
+  scroll-snap-align: start;
+  flex: 0 0 78%;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.carousel-card:hover { transform: translateY(-5px); border-color: var(--lime); box-shadow: var(--shadow-tight); }
+
+.carousel-card-media {
+  position: relative;
+  width: 100%;
+  background: var(--bg-1);
+}
+/* A imagem define sua própria altura — sem aspect-ratio fixo, sem cover,
+   sem quadrado forçado. Cada foto aparece inteira, na proporção real dela. */
+.carousel-card-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Selo discreto exibido só enquanto a foto real do produto não existe —
+   some sozinho assim que o arquivo correspondente for adicionado. Tem
+   proporção própria (não depende da altura da imagem, que agora é livre). */
+.media-fallback {
+  display: none;
+  width: 100%;
+  aspect-ratio: 4/3;
+  align-items: center;
+  justify-content: center;
+}
+.media-fallback.is-visible { display: flex; }
+.media-fallback svg {
+  width: 34%;
+  max-width: 56px;
+  color: var(--lime);
+  opacity: 0.55;
+}
+
+.carousel-card-body { padding: 14px; }
+.carousel-card-body h4 { font-family: var(--font-display); font-size: 0.98rem; font-weight: 700; color: var(--white); }
+.carousel-card-cat { display: block; margin-top: 2px; font-size: 0.72rem; font-weight: 600; color: var(--lime); }
+.carousel-card-body .btn { margin-top: 10px; width: 100%; padding: 9px 16px; font-size: 0.8rem; }
+
+.carousel-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--white);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.carousel-arrow svg { width: 17px; height: 17px; }
+.carousel-arrow:hover { background: var(--lime); color: var(--bg-0); transform: scale(1.06); }
+
+.carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background 0.3s var(--ease), width 0.3s var(--ease);
+  cursor: pointer;
+}
+.carousel-dot.is-active { background: var(--lime); width: 18px; border-radius: 100px; }
+
+@media (min-width: 700px) {
+  .carousel-card { flex: 0 0 44%; }
+}
+
+@media (min-width: 980px) {
+  .carousel-card { flex: 0 0 23.3%; }
+  .carousel-arrow { width: 44px; height: 44px; }
+  .carousel-arrow svg { width: 19px; height: 19px; }
+}
+
+/* ==========================================================================
+   Qualidade / Compromisso
+   ========================================================================== */
+
+.quality { padding: var(--space-section) 0; background: var(--bg-1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.quality-grid { display: grid; gap: 28px; grid-template-columns: repeat(2, 1fr); margin-top: 14px; }
+.quality-item { border-top: 1px solid var(--line); padding-top: 20px; }
+.quality-item svg { width: 30px; height: 30px; color: var(--lime); margin-bottom: 14px; }
+.quality-item h3 { font-size: 1.08rem; }
+.quality-item p { margin-top: 6px; font-size: 0.88rem; }
+
+/* ==========================================================================
+   Galeria
+   ========================================================================== */
+
+.gallery { padding: var(--space-section) 0; background: var(--bg-0); }
+.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 6px; }
+.gallery-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-1);
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-item.tall { grid-row: span 2; min-height: 340px; }
+.gallery-item.short { min-height: 160px; }
+.gallery-cta { text-align: center; margin-top: 30px; }
+
+/* ==========================================================================
+   CTA final
+   ========================================================================== */
+
+.cta-whats {
+  margin: 0 var(--gutter);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-0) 100%);
+  border: 1px solid var(--line);
+  padding: 48px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-whats::before {
+  content: '';
+  position: absolute;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(184,229,29,0.14), transparent 70%);
+  border-radius: 50%;
+  top: -120px; right: -80px;
+}
+.cta-whats h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 18ch; margin: 0 auto; }
+.cta-whats p { max-width: 46ch; margin: 16px auto 0; }
+.cta-whats .btn { margin-top: 26px; }
+
+/* ==========================================================================
+   Instagram
+   ========================================================================== */
+
+.instagram { padding: var(--space-section) 0; text-align: center; background: var(--bg-0); }
+.instagram .section-head { margin-left: auto; margin-right: auto; }
+.insta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 760px; margin: 24px auto 0; }
+.insta-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  color: var(--lime);
+}
+.insta-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
+.insta-tile:hover img, .insta-tile:focus-visible img { transform: scale(1.05); }
+.insta-tile:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+.insta-tile-icon {
+  position: absolute; top: 8px; right: 8px;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.55); color: var(--white);
+}
+.insta-tile-icon svg { width: 16px; height: 16px; }
+.instagram .btn { margin-top: 28px; }
+.instagram .btn svg { width: 20px; height: 20px; margin-right: 8px; flex-shrink: 0; }
+.insta-handle { display: inline-block; margin-top: 12px; font-weight: 600; color: var(--lime); }
+
+/* ==========================================================================
+   Localização
+   ========================================================================== */
+
+.location { padding: var(--space-section) 0; background: var(--bg-1); border-top: 1px solid var(--line); }
+.location-inner { display: grid; gap: 28px; grid-template-columns: 1fr; }
+.location-info { display: flex; flex-direction: column; gap: 18px; }
+.location-row { display: flex; gap: 12px; align-items: flex-start; }
+.location-row svg { width: 22px; height: 22px; color: var(--lime); flex-shrink: 0; margin-top: 2px; }
+.location-row strong { display: block; color: var(--white); margin-bottom: 3px; }
+.location-row span { color: var(--text-soft); font-size: 0.92rem; }
+.map-embed {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 260px;
+  background: var(--bg-2);
+}
+.map-embed iframe { width: 100%; height: 100%; min-height: 260px; border: 0; display: block; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer { background: var(--bg-0); color: var(--text-soft); padding: 48px 0 24px; border-top: 1px solid var(--line); }
+.footer-top { display: grid; gap: 32px; grid-template-columns: 1fr; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+.footer-brand { display: flex; align-items: center; gap: 10px; }
+.footer-brand .brand-logo { height: 46px; }
+.footer-brand strong { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); }
+.footer-tagline { margin-top: 12px; font-style: italic; color: var(--lime); font-family: var(--font-display); }
+.footer-col strong { display: block; color: var(--white); margin-bottom: 12px; font-size: 0.92rem; }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.footer-col a { font-size: 0.88rem; transition: color 0.3s; }
+.footer-col a:hover { color: var(--lime); }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+.footer-social a:hover { background: var(--lime); border-color: var(--lime); }
+.footer-social a:hover svg { color: var(--bg-0); }
+.footer-social svg { width: 17px; height: 17px; color: var(--white); }
+.footer-bottom { padding-top: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 0.78rem; text-align: center; color: var(--text-faint); }
+
+/* ==========================================================================
+   WhatsApp float button
+   ========================================================================== */
+
+/* Botões flutuantes empilhados (Instagram acima, WhatsApp abaixo) — sem sobreposição */
+.float-actions {
+  position: fixed;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.float-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s var(--ease);
+}
+.float-btn:hover { transform: scale(1.08); }
+.float-btn svg { width: 26px; height: 26px; color: var(--white); }
+.whatsapp-float { background: #25D366; box-shadow: 0 14px 30px -12px rgba(37, 211, 102, 0.7); }
+.instagram-float {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 14px 30px -12px rgba(220, 39, 67, 0.7);
+}
+
+/* ==========================================================================
+   Responsive — tablet (768–1023px)
+   ========================================================================== */
+
+@media (min-width: 700px) {
+  .strip-grid { grid-template-columns: repeat(4, 1fr); }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .quality-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .location-info { flex-direction: row; flex-wrap: wrap; }
+  .location-row { flex: 1 1 40%; }
+  .footer-top { grid-template-columns: 1.3fr 1fr 1fr; }
+  .about-inner { gap: 44px; }
+}
+
+/* ==========================================================================
+   Responsive — desktop (1024px+)
+   ========================================================================== */
+
+@media (min-width: 980px) {
+  .brand-word { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; color: var(--white); }
+  .main-nav { display: block; }
+  .icon-btn { display: flex; }
+  .hamburger { display: none; }
+  .mobile-nav { display: none; }
+
+  .hero { padding-top: 84px; }
+  .about-inner { grid-template-columns: 0.9fr 1.1fr; }
+  .about-inner.reverse { direction: rtl; }
+  .about-inner.reverse > * { direction: ltr; }
+  .cat-grid { grid-template-columns: repeat(4, 1fr); }
+  .products-grid { grid-template-columns: repeat(4, 1fr); }
+  .quality-grid { grid-template-columns: repeat(3, 1fr); }
+  .location-inner { grid-template-columns: 0.9fr 1.1fr; }
+  .cta-whats { padding: 64px 56px; }
+  .banner-inner { padding: 34px 64px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     HEADER
+     ========================================================================== -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="#inicio" class="brand" aria-label="Boa Hortifruti — início">
+      <span class="brand-logo">
+        <img src="images/logo/boa-hortifruti-logo.jpeg" alt="Logomarca Boa Hortifruti">
+      </span>
+      <span class="brand-word">Boa Hortifruti</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre nós</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#qualidade">Qualidade</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." class="icon-btn" data-wa-link target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/boahortfruti/" class="icon-btn" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Ver Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navegação mobile">
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre nós</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#qualidade">Qualidade</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." class="btn btn-whatsapp btn-block" data-wa-link target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+      <a href="https://www.instagram.com/boahortfruti/" class="btn btn-outline btn-block" data-instagram-link target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ==========================================================================
+     HERO
+     A arte abaixo é o asset visual oficial (16:9), usada tal como fornecida,
+     sem recriação por HTML/CSS. Dois links invisíveis ficam posicionados
+     sobre os botões já desenhados na arte ("Fale conosco" e "Conheça
+     nossos produtos") apenas para que continuem clicáveis de verdade.
+     ========================================================================== -->
+<section class="hero" id="inicio">
+  <div class="hero-image-frame">
+    <picture>
+      <source
+        media="(max-width: 767px)"
+        srcset="images/hero/hero-mobile.png"
+      >
+      <img
+        src="images/hero/hero-desktop.png"
+        alt="Boa Hortifruti — frutas, verduras e legumes selecionados em uma cesta em formato de coração, com a logomarca Boa Hortifruti ao centro. Frescor que dá gosto! Há 13 anos levando qualidade e frescor."
+        class="hero-art"
+        width="1672"
+        height="776"
+      >
+    </picture>
+    <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." class="hero-hotspot hero-hotspot-whats" data-wa-link target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp"></a>
+    <a href="#produtos" class="hero-hotspot hero-hotspot-produtos" aria-label="Conheça nossos produtos"></a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FAIXA DE DIFERENCIAIS
+     ========================================================================== -->
+<section class="strip">
+  <div class="container strip-grid reveal-stagger">
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <div><strong>14 anos</strong><span>de experiência</span></div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
+      <div><strong>Qualidade</strong><span>em cada produto</span></div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8z"/></svg>
+      <div><strong>Frutas, verduras</strong><span>e legumes</span></div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2c3 5 7 9.5 7 13a7 7 0 0 1-14 0c0-3.5 4-8 7-13z"/></svg>
+      <div><strong>Frescor</strong><span>que dá gosto</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     SOBRE NÓS
+     ========================================================================== -->
+<section class="about" id="sobre">
+  <div class="container about-inner">
+    <div class="reveal">
+      <span class="about-eyebrow">Sobre a Boa Hortifruti</span>
+      <h2>Qualidade é o nosso sobrenome.</h2>
+      <p class="lead">A Boa Hortifruti representa crescimento, experiência, qualidade e evolução. Há quase 14 anos no mercado, trabalhamos com frutas, verduras, legumes, hortaliças e ervas, sempre com foco em qualidade, frescor e confiança.</p>
+      <p class="lead">Tudo começou com um peão comum que recebeu a oportunidade de entrar no ramo de hortifruti e se dedicou de verdade ao negócio — e foi a partir dessa oportunidade que a empresa foi crescendo e construindo a trajetória que tem hoje.</p>
+      <p class="lead">Qualidade, confiança, compromisso, bom atendimento, preço justo e cuidado com cada produto guiam o nosso trabalho todos os dias.</p>
+      <div class="about-stats">
+        <div><strong>14</strong><span>anos de mercado</span></div>
+        <div><strong>4</strong><span>categorias de produtos</span></div>
+      </div>
+      <a href="#produtos" class="btn btn-lime">Ver produtos</a>
+    </div>
+    <div class="photo-placeholder reveal">
+      <div>
+        <strong>Espaço reservado para fotografia real</strong>
+        [Adicionar foto da equipe, loja ou produtos da Boa Hortifruti]
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CATEGORIAS
+     ========================================================================== -->
+<section class="categories" id="categorias">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Encontre o que você procura</h2>
+      <p>Navegue pelas nossas categorias e converse com a gente sobre o que você precisa.</p>
+    </div>
+    <div class="cat-grid reveal-stagger">
+      <a href="#produtos" class="cat-card">
+        <div class="cat-photo"><img src="images/categorias/frutas-capa.jpg" alt="Frutas selecionadas da Boa Hortifruti" loading="lazy"></div>
+        <div class="cat-bar">
+          <div class="cat-bar-left">
+            <span class="cat-icon-badge">🍊</span>
+            <strong>Frutas</strong>
+          </div>
+          <span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a href="#produtos" class="cat-card">
+        <div class="cat-photo"><img src="images/categorias/verduras-capa.jpg" alt="Verduras e folhas selecionadas da Boa Hortifruti" loading="lazy"></div>
+        <div class="cat-bar">
+          <div class="cat-bar-left">
+            <span class="cat-icon-badge">🥬</span>
+            <strong>Verduras e Folhas</strong>
+          </div>
+          <span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a href="#produtos" class="cat-card">
+        <div class="cat-photo"><img src="images/categorias/legumes-capa.jpg" alt="Legumes e hortaliças selecionados da Boa Hortifruti" loading="lazy"></div>
+        <div class="cat-bar">
+          <div class="cat-bar-left">
+            <span class="cat-icon-badge">🥦</span>
+            <strong>Legumes e Hortaliças</strong>
+          </div>
+          <span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a href="#produtos" class="cat-card">
+        <div class="cat-photo"><img src="images/categorias/ervas-capa.jpg" alt="Ervas, temperos e outros produtos da Boa Hortifruti" loading="lazy"></div>
+        <div class="cat-bar">
+          <div class="cat-bar-left">
+            <span class="cat-icon-badge">🌿</span>
+            <strong>Ervas, Temperos e Outros</strong>
+          </div>
+          <span class="cat-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     BANNER
+     ========================================================================== -->
+<section class="banner">
+  <div class="container">
+    <div class="banner-inner reveal">
+      <div class="banner-text">
+        <h3>Frescor que dá gosto</h3>
+        <p>Qualidade em frutas, verduras e legumes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     NOSSOS PRODUTOS — 4 carrosséis independentes (Frutas, Legumes e
+     Hortaliças, Verduras e Folhas, Ervas/Temperos e Outros).
+     Conteúdo preenchido via JavaScript a partir de PRODUCT_GROUPS no <script> ao final deste arquivo
+     ========================================================================== -->
+<section class="our-products" id="produtos">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Nossos produtos</h2>
+      <p>Qualidade, variedade e frescor para atender às necessidades dos nossos clientes.</p>
+    </div>
+
+    <div class="product-group reveal" data-group="frutas">
+      <div class="product-group-head">
+        <span class="product-group-icon">🍊</span>
+        <h3>Frutas</h3>
+      </div>
+      <div class="carousel" data-carousel>
+        <button class="carousel-arrow prev" data-carousel-prev aria-label="Ver frutas anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-frutas" data-carousel-viewport tabindex="0" role="region" aria-label="Carrossel de frutas"></div>
+        <button class="carousel-arrow next" data-carousel-next aria-label="Ver mais frutas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+
+    <div class="product-group reveal" data-group="legumes">
+      <div class="product-group-head">
+        <span class="product-group-icon">🥦</span>
+        <h3>Legumes e Hortaliças</h3>
+      </div>
+      <div class="carousel" data-carousel>
+        <button class="carousel-arrow prev" data-carousel-prev aria-label="Ver legumes e hortaliças anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-legumes" data-carousel-viewport tabindex="0" role="region" aria-label="Carrossel de legumes e hortaliças"></div>
+        <button class="carousel-arrow next" data-carousel-next aria-label="Ver mais legumes e hortaliças">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+
+    <div class="product-group reveal" data-group="verduras">
+      <div class="product-group-head">
+        <span class="product-group-icon">🥬</span>
+        <h3>Verduras e Folhas</h3>
+      </div>
+      <div class="carousel" data-carousel>
+        <button class="carousel-arrow prev" data-carousel-prev aria-label="Ver verduras e folhas anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-verduras" data-carousel-viewport tabindex="0" role="region" aria-label="Carrossel de verduras e folhas"></div>
+        <button class="carousel-arrow next" data-carousel-next aria-label="Ver mais verduras e folhas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+
+    <div class="product-group reveal" data-group="ervas">
+      <div class="product-group-head">
+        <span class="product-group-icon">🌿</span>
+        <h3>Ervas, Temperos e Outros</h3>
+      </div>
+      <div class="carousel" data-carousel>
+        <button class="carousel-arrow prev" data-carousel-prev aria-label="Ver ervas e temperos anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="carousel-viewport" id="carousel-ervas" data-carousel-viewport tabindex="0" role="region" aria-label="Carrossel de ervas, temperos e outros"></div>
+        <button class="carousel-arrow next" data-carousel-next aria-label="Ver mais ervas e temperos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     QUALIDADE
+     ========================================================================== -->
+<section class="quality" id="qualidade">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Do cuidado à sua mesa.</h2>
+      <p>Cada etapa pensada para garantir o melhor produto até você.</p>
+    </div>
+    <div class="quality-grid reveal-stagger">
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Experiência</h3>
+        <p>Quase 14 anos de mercado cuidando de quem confia na gente.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7l8-4 8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg>
+        <h3>Variedade</h3>
+        <p>Frutas, verduras, legumes, hortaliças e ervas em um só lugar.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+        <h3>Qualidade</h3>
+        <p>É o nosso sobrenome — em cada produto que oferecemos.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+        <h3>Eficiência</h3>
+        <p>Atendimento ágil, do pedido à entrega.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        <h3>Reposição frequente</h3>
+        <p>Produtos renovados com frequência, sempre fresquinhos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     COMO FUNCIONA — atacado/varejo, público atendido, região, entrega/retirada
+     e pedidos. Reaproveita o mesmo estilo visual da seção Qualidade.
+     ========================================================================== -->
+<section class="quality" id="como-funciona">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Como funciona</h2>
+      <p>Atacado e varejo, entrega e retirada — feito sob medida para cada cliente.</p>
+    </div>
+    <div class="quality-grid reveal-stagger">
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h18M3 7v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7M3 7l2-4h14l2 4"/><path d="M9 12h6"/></svg>
+        <h3>Atacado e varejo</h3>
+        <p>Atendemos principalmente o atacado, para compras em maior volume, e também o varejo, com pedidos menores conforme a necessidade de cada cliente.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-6h6v6"/></svg>
+        <h3>Quem atendemos</h3>
+        <p>Mercados, hotéis, restaurantes, feirantes e outras empresas que trabalham com produtos hortifrutigranjeiros.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <h3>Onde atendemos</h3>
+        <p>Salvador, Região Metropolitana, Feira de Santana, Camaçari, Guarajuba e outras localidades.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h3l3 3v4h-6z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>
+        <h3>Entrega e retirada</h3>
+        <p>Normalmente levamos os produtos até você, mas também é possível retirar o pedido diretamente no local.</p>
+      </div>
+      <div class="quality-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+        <h3>Como pedir</h3>
+        <p>Pedidos feitos principalmente pelo WhatsApp, podendo também ser enviados por e-mail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     GALERIA
+     ========================================================================== -->
+<section class="gallery" id="galeria">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Nosso dia a dia</h2>
+      <p>Um pouco da rotina, dos produtos e da equipe da Boa Hortifruti.</p>
+    </div>
+    <div class="gallery-grid reveal-stagger">
+      <div class="gallery-item tall"><img src="images/galeria/equipe-evento.jpg" alt="Equipe da Boa Hortifruti em ação de divulgação da marca" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/equipe-loja.jpg" alt="Equipe da Boa Hortifruti organizando frutas e verduras" loading="lazy"></div>
+      <div class="gallery-item tall"><img src="images/galeria/melancias-colheita.jpg" alt="Melancias colhidas, prontas para distribuição" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/cenouras.jpg" alt="Cenouras frescas selecionadas" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/abacates.jpg" alt="Abacates selecionados em caixas" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/pimentao-vermelho.jpg" alt="Pimentões vermelhos selecionados" loading="lazy"></div>
+      <div class="gallery-item tall"><img src="images/galeria/mangas.jpg" alt="Mangas selecionadas em caixas" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/pimentao-amarelo.jpg" alt="Pimentões amarelos selecionados" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/couve-flor.jpg" alt="Couve-flor fresca embalada" loading="lazy"></div>
+      <div class="gallery-item short"><img src="images/galeria/melao.jpg" alt="Melões amarelos selecionados" loading="lazy"></div>
+      <div class="gallery-item tall"><img src="images/galeria/melancia-fatias.jpg" alt="Fatias de melancia fresca" loading="lazy"></div>
+    </div>
+    <div class="gallery-cta reveal">
+      <a href="https://www.instagram.com/boahortfruti/" class="btn btn-outline" data-instagram-link target="_blank" rel="noopener noreferrer">Ver mais no Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CTA WHATSAPP
+     ========================================================================== -->
+<section class="cta-section">
+  <div class="cta-whats reveal">
+    <h2>Quer levar mais frescor para sua mesa?</h2>
+    <p>Fale com a gente e conheça os produtos selecionados da Boa Hortifruti.</p>
+    <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." class="btn btn-lime" data-wa-link target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+      Fale conosco
+    </a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     INSTAGRAM
+     ========================================================================== -->
+<section class="instagram">
+  <div class="container">
+    <div class="section-head center reveal">
+      <h2>Mais frescor no nosso Instagram</h2>
+      <p>Acompanhe novidades, produtos e o dia a dia da Boa Hortifruti.</p>
+      <span class="insta-handle">@boahortfruti</span>
+    </div>
+    <div class="insta-grid reveal-stagger">
+      <a class="insta-tile" href="https://www.instagram.com/boahortfruti/" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Ver publicação no Instagram @boahortfruti: o proprietário com uma caixa de frutas e legumes">
+        <img src="images/instagram/dono-boa-hortifruti.jpg" alt="Ilustração do proprietário da Boa Hortifruti segurando uma caixa de legumes frescos, com o caminhão da marca ao fundo" width="420" height="570" loading="lazy">
+        <span class="insta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
+      </a>
+      <a class="insta-tile" href="https://www.instagram.com/boahortfruti/" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Ver publicação no Instagram @boahortfruti: melancias frescas na loja">
+        <img src="images/instagram/melancias-loja.jpg" alt="Melancias inteiras e em fatias expostas na loja da Boa Hortifruti" width="450" height="572" loading="lazy">
+        <span class="insta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
+      </a>
+      <a class="insta-tile" href="https://www.instagram.com/boahortfruti/" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Ver publicação no Instagram @boahortfruti: brócolis e couve-flor embalados">
+        <img src="images/instagram/brocolis-couve-flor-embalados.jpg" alt="Brócolis e couve-flor embalados e etiquetados, prontos para venda" width="594" height="444" loading="lazy">
+        <span class="insta-tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
+      </a>
+    </div>
+    <a href="https://www.instagram.com/boahortfruti/" class="btn btn-lime" data-instagram-link target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      Seguir no Instagram
+    </a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     LOCALIZAÇÃO
+     ========================================================================== -->
+<section class="location" id="contato">
+  <div class="container location-inner">
+    <div class="location-info reveal">
+      <div class="location-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div><strong>Endereço</strong><span>CEASA — Jardim das Margaridas, Salvador/BA</span></div>
+      </div>
+      <div class="location-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><strong>Horário de funcionamento</strong><span>Das 03h às 15h</span></div>
+      </div>
+      <div class="location-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+        <div><strong>WhatsApp</strong><span>(71) 98947-0111</span></div>
+      </div>
+      <a href="https://www.google.com/maps/search/?api=1&query=CEASA+Jardim+das+Margaridas+Salvador+BA" class="btn btn-lime" target="_blank" rel="noopener noreferrer" aria-label="Como chegar à Boa Hortifruti no Google Maps">Como chegar</a>
+    </div>
+    <div class="map-embed reveal">
+      <iframe
+        src="https://www.google.com/maps?q=CEASA+Jardim+das+Margaridas,+Salvador+-+BA&output=embed"
+        title="Localização da Boa Hortifruti — CEASA, Jardim das Margaridas, Salvador - BA"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==========================================================================
+     FOOTER
+     ========================================================================== -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div>
+      <div class="footer-brand">
+        <span class="brand-logo">
+          <img src="images/logo/boa-hortifruti-logo.jpeg" alt="Logomarca Boa Hortifruti">
+        </span>
+        <strong>Boa Hortifruti</strong>
+      </div>
+      <p class="footer-tagline">Frescor que dá gosto!</p>
+      <div class="footer-social" style="margin-top:20px;">
+        <a href="https://www.instagram.com/boahortfruti/" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+        <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." data-wa-link target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <strong>Navegação</strong>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre nós</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#qualidade">Qualidade</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <strong>Contato</strong>
+      <ul>
+        <li><a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." data-wa-link target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/boahortfruti/" data-instagram-link target="_blank" rel="noopener noreferrer">@boahortfruti</a></li>
+        <li><span>CEASA — Jardim das Margaridas, Salvador/BA</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="footer-year">2026</span> Boa Hortifruti. Todos os direitos reservados.</span>
+  </div>
+</footer>
+
+<div class="float-actions">
+  <a href="https://www.instagram.com/boahortfruti/" class="float-btn instagram-float" data-instagram-link target="_blank" rel="noopener noreferrer" aria-label="Seguir @boahortfruti no Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+  </a>
+  <a href="https://wa.me/5571989470111?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Boa%20Hortifruti%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20produtos." class="float-btn whatsapp-float" data-wa-link target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.5 1.1 2.7c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.6 13.5 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20.2 12 20.2z"/></svg>
+</a>
+</div>
+
+<script>
+/* ==========================================================================
+   Boa Hortifruti — Configuração editável
+   Edite os valores abaixo para atualizar o site sem mexer no resto do código.
+   ========================================================================== */
+
+// Número de WhatsApp comercial da Boa Hortifruti, já no formato
+// internacional completo (DDI 55 + DDD + número).
+const WHATSAPP_NUMBER = "5571989470111";
+
+const INSTAGRAM_URL = "https://www.instagram.com/boahortfruti/";
+
+// Mensagem padrão enviada ao clicar em qualquer botão de WhatsApp.
+// Pode ser sobrescrita por botão através do atributo data-wa-message.
+const WHATSAPP_DEFAULT_MESSAGE = "Olá! Vim pelo site da Boa Hortifruti e gostaria de saber mais sobre os produtos.";
+
+/* ==========================================================================
+   Nossos produtos — 4 categorias (Frutas, Legumes e Hortaliças,
+   Verduras e Folhas, Ervas/Temperos e Outros).
+   Edite os arrays abaixo para adicionar, remover ou ajustar produtos.
+   "imagem" é opcional — se vazio (null), o card procura automaticamente
+   images/produtos/<grupo>/<nome-em-slug>.webp. Defina "imagem"
+   manualmente só se o arquivo tiver um nome ou extensão diferente.
+   ========================================================================== */
+
+const PRODUCT_GROUPS = {
+  frutas: {
+    label: "Frutas",
+    icon: "🍊",
+    imagePath: "images/produtos/frutas/",
+    items: [
+      { nome: "Atemoia", imagem: "Atemoia.webp" },
+      { nome: "Coco seco", imagem: "coco_seco.webp" },
+      { nome: "Goiaba", imagem: "Goiaba.webp" },
+      // "Laranja para suco" não é um produto separado — é a mesma Laranja Pera.
+      { nome: "Laranja Pera", imagem: "Laranja_Pera.webp" },
+      { nome: "Laranja Lima", imagem: "Laranja_Lima.webp" },
+      { nome: "Lima-da-pérsia", imagem: "lima_da_persia.jpg" },
+      { nome: "Melancia", imagem: "Melancia.jpg" },
+      { nome: "Manga Espada", imagem: "Manga_Espada.jpg" },
+      { nome: "Romã", imagem: "roma.jpg" },
+      { nome: "Physalis", imagem: "Physalis.jpg" },
+      { nome: "Pinha", imagem: "Pinha.jpg" },
+      { nome: "Tangerina Murcot", imagem: "Tangerina_Murcot.jpg" },
+    ],
+  },
+  legumes: {
+    label: "Legumes e Hortaliças",
+    icon: "🥦",
+    imagePath: "images/produtos/legumes/",
+    items: [
+      { nome: "Aspargo", imagem: "Aspargo.jpg" },
+      { nome: "Batata Yakon", imagem: "batata_yakon.jpg" },
+      { nome: "Batata", imagem: "batata.jpg" },
+      { nome: "Brócolis comum", imagem: "brocolis.jpg" },
+      { nome: "Brócolis japonês", imagem: "brocolis_japones.jpg" },
+      { nome: "Beterraba", imagem: "beterraba.jpg" },
+      { nome: "Broto de alfafa", imagem: "broto_de_alfafa.jpg" },
+      { nome: "Cenoura baby", imagem: "cenoura_baby.jpg" },
+      { nome: "Chuchu", imagem: "chuchu.jpg" },
+      { nome: "Couve-bruxelas", imagem: "couve-bruxelas.jpg" },
+      { nome: "Couve-flor", imagem: "couve-flor.jpg" },
+      { nome: "Feijão verde", imagem: "feijao_verde.jpg" },
+      { nome: "Gengibre", imagem: "gengibre.jpg" },
+      { nome: "Inhame", imagem: "inhame.jpg" },
+      { nome: "Jiló", imagem: "jilo.jpg" },
+      { nome: "Maxixe", imagem: "maxixe.jpg" },
+      { nome: "Mandioquinha", imagem: "mandioquinha.jpg" },
+      { nome: "Nabo", imagem: "nabo.jpg" },
+      { nome: "Pepino japonês", imagem: "Pepino_japones.jpg" },
+      // Ainda sem foto enviada — aparece com o selo discreto até a imagem chegar.
+      { nome: "Pimenta cheiro", imagem: "pimenta-cheiro.jpg" },
+      { nome: "Pimenta cheiro doce", imagem: "pimenta-cheiro_doce.jpg" },
+      { nome: "Pimenta dedo-de-moça", imagem: "pimenta_dedo-de-moca.jpg" },
+      { nome: "Pimenta malagueta", imagem: "pimenta_malagueta.jpg" },
+      { nome: "Pimentão verde", imagem: "pimentao_verde.jpg" },
+      { nome: "Quiabo", imagem: "quiabo.jpg" },
+      { nome: "Mix de brócolis/couve", imagem: "mix_de_brocolis_e_couve.jpg" },
+      { nome: "Mix de pimentas", imagem: "mix_de_pimentas.jpg" },
+    ],
+  },
+  verduras: {
+    label: "Verduras e Folhas",
+    icon: "🥬",
+    imagePath: "images/produtos/verduras/",
+    items: [
+      { nome: "Acelga", imagem: "acelga.jpg" },
+      { nome: "Endívia", imagem: "endivia.jpg" },
+      { nome: "Endívia torta", imagem: "endivia_torta.jpg" },
+      { nome: "Escarola", imagem: "escarola.jpg" },
+      { nome: "Folha de louro", imagem: "folha_de_louro.jpg" },
+      { nome: "Nirá francês", imagem: "nira_frances.jpg" },
+      { nome: "Radicchio", imagem: "radicchio.jpg" },
+    ],
+  },
+  ervas: {
+    label: "Ervas, Temperos e Outros",
+    icon: "🌿",
+    imagePath: "images/produtos/ervas/",
+    items: [
+      { nome: "Alecrim", imagem: "alecrim.jpg" },
+      { nome: "Alho americano", imagem: "alho_americano.jpg" },
+      { nome: "Alho-poró", imagem: "alho-poro.jpg" },
+      { nome: "Cogumelo shitake", imagem: "cogumelo_shiitake.jpg" },
+      { nome: "Salsa", imagem: "salsa.jpg" },
+      { nome: "Tomilho", imagem: "tomilho.jpg" },
+    ],
+  },
+};
+
+/* ==========================================================================
+   Helpers
+   ========================================================================== */
+
+function buildWhatsAppLink(message) {
+  const text = encodeURIComponent(message || WHATSAPP_DEFAULT_MESSAGE);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+}
+
+function applyWhatsAppLinks() {
+  document.querySelectorAll("[data-wa-link]").forEach((el) => {
+    const customMessage = el.getAttribute("data-wa-message");
+    el.setAttribute("href", buildWhatsAppLink(customMessage));
+  });
+}
+
+function applyInstagramLinks() {
+  document.querySelectorAll("[data-instagram-link]").forEach((el) => {
+    el.setAttribute("href", INSTAGRAM_URL);
+  });
+}
+
+// Gera o nome de arquivo esperado a partir do nome do produto, seguindo o
+// mesmo padrão dos exemplos (ex.: "Lima-da-pérsia" -> "lima-da-persia").
+function slugify(nome) {
+  return nome
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/* ==========================================================================
+   Renderiza os quatro carrosséis de produtos a partir de PRODUCT_GROUPS.
+
+   Cada card tenta carregar a imagem automaticamente pelo caminho
+   images/produtos/<grupo>/<nome-do-produto-em-slug>.webp (ou o
+   caminho definido manualmente em "imagem"). Enquanto o arquivo real não
+   existir, o carregamento falha silenciosamente e um selo decorativo
+   discreto (sem texto, sem imagem de banco) aparece no lugar — quando a
+   foto for adicionada com o nome certo, ela passa a aparecer sozinha,
+   sem precisar mexer no código.
+   ========================================================================== */
+
+function renderProductCarousels() {
+  Object.entries(PRODUCT_GROUPS).forEach(([key, group]) => {
+    const viewport = document.getElementById(`carousel-${key}`);
+    if (!viewport) return;
+
+    viewport.innerHTML = group.items.map((item) => {
+      const message = `Olá! Vim pelo site da Boa Hortifruti e tenho interesse em comprar ${item.nome}.`;
+      const fileName = item.imagem || `${slugify(item.nome)}.webp`;
+      const src = `${group.imagePath}${fileName}`;
+
+      return `
+        <article class="carousel-card">
+          <div class="carousel-card-media">
+            <img
+              src="${src}"
+              alt="${item.nome} — Boa Hortifruti"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.classList.add('is-visible');"
+            >
+            <div class="media-fallback" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M24 6c6 6 12 12.5 12 20a12 12 0 0 1-24 0c0-7.5 6-14 12-20z"/>
+                <path d="M24 14v22M18 20c3 1 9 1 12 0" stroke-width="1.1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <h4>${item.nome}</h4>
+            <span class="carousel-card-cat">${group.label}</span>
+            <a class="btn btn-whatsapp btn-block" href="${buildWhatsAppLink(message)}" target="_blank" rel="noopener">
+              Tenho interesse
+            </a>
+          </div>
+        </article>
+      `;
+    }).join("");
+  });
+}
+
+/* ==========================================================================
+   Carrosséis — scroll nativo com snap (suporta touch swipe de graça),
+   setas para avançar/voltar e indicadores. Sem bibliotecas externas.
+   ========================================================================== */
+
+function initCarousel(root) {
+  const viewport = root.querySelector("[data-carousel-viewport]");
+  const prevBtn = root.querySelector("[data-carousel-prev]");
+  const nextBtn = root.querySelector("[data-carousel-next]");
+  const dotsWrap = root.closest(".product-group")?.querySelector("[data-carousel-dots]");
+  if (!viewport) return;
+
+  const getCards = () => Array.from(viewport.children);
+
+  function cardStep() {
+    const cards = getCards();
+    if (cards.length === 0) return 0;
+    const style = window.getComputedStyle(viewport);
+    const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+    return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  function scrollByCards(direction) {
+    viewport.scrollBy({ left: direction * cardStep(), behavior: "smooth" });
+  }
+
+  prevBtn?.addEventListener("click", () => scrollByCards(-1));
+  nextBtn?.addEventListener("click", () => scrollByCards(1));
+
+  viewport.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") { event.preventDefault(); scrollByCards(1); }
+    if (event.key === "ArrowLeft") { event.preventDefault(); scrollByCards(-1); }
+  });
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    const cards = getCards();
+    dotsWrap.innerHTML = cards.map((_, i) => `<span class="carousel-dot" data-dot-index="${i}"></span>`).join("");
+  }
+  buildDots();
+
+  function updateActiveDot() {
+    if (!dotsWrap) return;
+    const step = cardStep();
+    if (!step) return;
+    const index = Math.round(viewport.scrollLeft / step);
+    dotsWrap.querySelectorAll(".carousel-dot").forEach((dot, i) => {
+      dot.classList.toggle("is-active", i === index);
+    });
+  }
+
+  dotsWrap?.addEventListener("click", (event) => {
+    const dot = event.target.closest("[data-dot-index]");
+    if (!dot) return;
+    const index = Number(dot.dataset.dotIndex);
+    viewport.scrollTo({ left: index * cardStep(), behavior: "smooth" });
+  });
+
+  let ticking = false;
+  viewport.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateActiveDot();
+      ticking = false;
+    });
+  }, { passive: true });
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateActiveDot, 150);
+  });
+
+  updateActiveDot();
+}
+
+function initAllCarousels() {
+  document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+}
+
+/* ==========================================================================
+   Menu mobile
+   ========================================================================== */
+
+function initMobileMenu() {
+  const toggle = document.getElementById("hamburger");
+  const nav = document.getElementById("mobile-nav");
+  if (!toggle || !nav) return;
+
+  const closeMenu = () => {
+    toggle.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    nav.classList.remove("is-open");
+    document.body.style.overflow = "";
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    toggle.classList.toggle("is-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  });
+
+  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+}
+
+/* ==========================================================================
+   Header com sombra ao rolar
+   ========================================================================== */
+
+function initHeaderScroll() {
+  const header = document.getElementById("site-header");
+  if (!header) return;
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+/* ==========================================================================
+   Animações de entrada (fade + slide) via IntersectionObserver
+   ========================================================================== */
+
+function initRevealAnimations() {
+  const elements = document.querySelectorAll(".reveal, .reveal-stagger");
+  if (!("IntersectionObserver" in window) || elements.length === 0) {
+    elements.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+/* ==========================================================================
+   Ano dinâmico no footer
+   ========================================================================== */
+
+function initFooterYear() {
+  const el = document.getElementById("footer-year");
+  if (el) el.textContent = new Date().getFullYear();
+}
+
+/* ==========================================================================
+   Init
+   ========================================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProductCarousels();
+  applyWhatsAppLinks();
+  applyInstagramLinks();
+  initMobileMenu();
+  initHeaderScroll();
+  initRevealAnimations();
+  initAllCarousels();
+  initFooterYear();
+});
+
+</script>
+</body>
+</html>
